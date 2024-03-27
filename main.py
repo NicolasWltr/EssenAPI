@@ -4,8 +4,8 @@ from datetime import timedelta
 from datetime import datetime
 import os, signal
 import winsound
-import win32api
-import win32con
+#import win32api
+#import win32con
 import json
 
 app = Flask(__name__)
