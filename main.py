@@ -238,7 +238,7 @@ def essen():
         if not(request.args.get('token') == "MyMumCanUseThisEveryTime"):
             return "denied"
 
-    url = "192.168.178.72:25565/essen"
+    url = "http://192.168.178.72:25565/essen"
 
     headers = {'Token': '1074473'}
 
