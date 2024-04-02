@@ -130,7 +130,6 @@ def IDNotPresent():
     return render_template("wrongID.html")
 
 
-
 @app.route('/deleteID', methods=['GET'])
 def deleteID():
     if checkForSession() == "login":
@@ -155,12 +154,13 @@ def checkForIDdelete():
             if save['id'] == idToDelete:
                 del saves[idOf]
                 break
-            idOf = idOf+1
+            idOf = idOf + 1
 
     with open(saver_file_path, 'w') as file:
         json.dump(saves, file)
 
     return redirect(url_for('start'))
+
 
 @app.route('/testapicall', methods=['GET'])
 def testapicall():
@@ -229,16 +229,84 @@ def checkForHeader():
         return "denied"
 
 
-
-#Call functions on PC
-
+# Call functions on PC
 @app.route('/apiWP/essen', methods=['GET'])
 def essen():
     if checkForHeader() == "denied":
-        if not(request.args.get('token') == "MyMumCanUseThisEveryTime"):
+        if not (request.args.get('token') == "MyMumCanUseThisEveryTime"):
             return "denied"
 
     url = "http://192.168.178.72:25565/essen"
+
+    headers = {'Token': '1074473'}
+
+    response = rq.get(url, headers=headers)
+
+    return response.text
+
+
+@app.route('/apiWP/resetTimer', methods=['GET'])
+def resetTimer():
+    if checkForHeader() == "denied":
+        return "denied"
+
+    url = "http://192.168.178.72:25565/resetTimer"
+
+    headers = {'Token': '1074473'}
+
+    response = rq.get(url, headers=headers)
+
+    return response.text
+
+
+@app.route('/apiWP/pp', methods=['GET'])
+def resetTimer():
+    if checkForHeader() == "denied":
+        return "denied"
+
+    url = "http://192.168.178.72:25565/pp"
+
+    headers = {'Token': '1074473'}
+
+    response = rq.get(url, headers=headers)
+
+    return response.text
+
+
+@app.route('/apiWP/stop', methods=['GET'])
+def resetTimer():
+    if checkForHeader() == "denied":
+        return "denied"
+
+    url = "http://192.168.178.72:25565/stop"
+
+    headers = {'Token': '1074473'}
+
+    response = rq.get(url, headers=headers)
+
+    return response.text
+
+
+@app.route('/apiWP/shutdown', methods=['GET'])
+def resetTimer():
+    if checkForHeader() == "denied":
+        return "denied"
+
+    url = "http://192.168.178.72:25565/shutdown"
+
+    headers = {'Token': '1074473'}
+
+    response = rq.get(url, headers=headers)
+
+    return response.text
+
+
+@app.route('/apiWP/shutdownstop', methods=['GET'])
+def resetTimer():
+    if checkForHeader() == "denied":
+        return "denied"
+
+    url = "http://192.168.178.72:25565/shutdownstop"
 
     headers = {'Token': '1074473'}
 
