@@ -36,6 +36,8 @@ function createButtons(apiCalled) {
 
                 xhr.open('GET', apiCall.url);
 
+                xhr.setRequestHeader('Token', '1074473');
+
                 xhr.onload = function () {
                     if (xhr.status >= 200 && xhr.status < 300) {
                         console.log(apiCall.name + ' API call successful:', xhr.responseText);

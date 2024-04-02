@@ -162,22 +162,26 @@ def checkForIDdelete():
     return redirect(url_for('start'))
 
 
-@app.route('/testapicall', methods=['GET'])
-def testapicall():
-    return "API"
-
-
 @app.route('/api/getAllAvailableAPICalls', methods=['GET'])
 def getAllAvailableAPICalls():
     return jsonify([
         {
-            "name": "TestApiCall", "url": "http://walternicolas.de/testapicall", "type": "call"
+            "name": "essen", "url": "http://walternicolas.de/apiWP/essen", "type": "call"
         },
         {
-            "name": "tester", "url": "http://walternicolas.de/logout", "type": "site"
+            "name": "resetTimer", "url": "http://walternicolas.de/apiWP/resetTimer", "type": "call"
         },
         {
-            "name": "tester", "url": "http://walternicolas.de/login", "type": "site"
+            "name": "Pause/Play", "url": "http://walternicolas.de/apiWP/pp", "type": "call"
+        },
+        {
+            "name": "stop", "url": "http://walternicolas.de/apiWP/stop", "type": "call"
+        },
+        {
+            "name": "Shutdown", "url": "http://walternicolas.de/apiWP/shutdown", "type": "call"
+        },
+        {
+            "name": "Stop Shutdown", "url": "http://walternicolas.de/apiWP/shutdownstop", "type": "call"
         }
     ])
 
