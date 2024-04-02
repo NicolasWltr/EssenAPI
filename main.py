@@ -234,15 +234,15 @@ def checkForHeader():
 
 @app.route('/apiWP/essen', methods=['GET'])
 def essen():
-    #if checkForHeader() == "denied":
-    #    if not(request.args.get('token') == "MyMumCanUseThisEveryTime"):
-    #        return "denied"
+    if checkForHeader() == "denied":
+        if not(request.args.get('token') == "MyMumCanUseThisEveryTime"):
+            return "denied"
 
     url = "http://192.168.178.72:25565/essen"
 
     headers = {'Token': '1074473'}
 
-    response = rq.get(url)
+    response = rq.get(url, headers=headers)
 
     return response.text
 
