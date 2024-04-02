@@ -227,7 +227,6 @@ def checkForSession():
 
 
 def checkForHeader():
-    print(request.headers)
     if request.headers.get('Token') == '1074473':
         return "Yes"
     else:

@@ -5,14 +5,14 @@ xhr.onload = function() {
         let apiCalls = JSON.parse(xhr.responseText);
         createButtons(apiCalls);
     } else {
-        console.error('Error making ' + apiCall.name + ' API call:', xhr.statusText);
+        // console.error('Error making ' + apiCall.name + ' API call:', xhr.statusText);
     }
 };
 
         // Define the behavior for error
-xhr.onerror = function() {
-    console.error('Error making ' + apiCall.name + ' API call:', xhr.statusText);
-};
+// xhr.onerror = function() {
+//     console.error('Error making ' + apiCall.name + ' API call:', xhr.statusText);
+// };
 
 xhr.send();
 
@@ -28,8 +28,6 @@ function createButtons(apiCalled) {
         button.textContent = apiCall.name;
         button.className = 'custom-button';
 
-        console.log("Check");
-
         button.addEventListener('click', function () {
             if (apiCall.type === "site") {
                 window.location.href = apiCall.url;
@@ -40,20 +38,17 @@ function createButtons(apiCalled) {
 
                 xhr.setRequestHeader('Token', '1074473')
 
-                console.log("Check");
-                console.log(xhr);
-
-                xhr.onload = function () {
-                    if (xhr.status >= 200 && xhr.status < 300) {
-                        console.log(apiCall.name + ' API call successful:', xhr.responseText);
-                    } else {
-                        console.error('Error making ' + apiCall.name + ' API call:', xhr.statusText);
-                    }
-                };
-
-                xhr.onerror = function () {
-                    console.error('Error making ' + apiCall.name + ' API call:', xhr.statusText);
-                };
+                // xhr.onload = function () {
+                //     if (xhr.status >= 200 && xhr.status < 300) {
+                //         console.log(apiCall.name + ' API call successful:', xhr.responseText);
+                //     } else {
+                //         console.error('Error making ' + apiCall.name + ' API call:', xhr.statusText);
+                //     }
+                // };
+                //
+                // xhr.onerror = function () {
+                //     console.error('Error making ' + apiCall.name + ' API call:', xhr.statusText);
+                // };
 
                 xhr.send();
             }
