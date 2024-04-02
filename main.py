@@ -1,11 +1,7 @@
-from flask import Flask, request, jsonify, redirect, url_for, render_template, session, make_response
-import subprocess
+from flask import Flask, request, redirect, url_for, render_template, session
 from datetime import timedelta
 from datetime import datetime
-import os, signal
-# import winsound
-# import win32api
-# import win32con
+import os
 import json
 
 app = Flask(__name__)
@@ -62,7 +58,7 @@ def logout():
 def start():
     if checkForSession() == "login":
         return redirect(url_for('login'))
-    return render_template("start.html")
+    return render_template("test.html")
 
 
 @app.route('/load', methods=['GET'])
