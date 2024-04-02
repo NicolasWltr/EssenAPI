@@ -3,6 +3,7 @@ from datetime import timedelta
 from datetime import datetime
 import os
 import json
+import requests as rq
 
 app = Flask(__name__)
 app.secret_key = 'asdfghjklöä'
@@ -228,5 +229,23 @@ def checkForHeader():
         return "denied"
 
 
+
+#Call functions on PC
+
+@app.route('/apiWP/essen', methods=['GET'])
+def essen():
+    if checkForHeader() == "denied":
+        if not(request.args.get('token') == "MyMumCanUseThisEveryTime"):
+            return "denied"
+
+    url = "192.168.178.72:25565/essen"
+
+    headers = {'Token': '1074473'}
+
+    response = rq.get(url, headers=headers)
+
+    return response.text
+
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', threaded=True, debug=True)
+    app.run(host='0.0.0.0', threaded=True)
