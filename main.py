@@ -260,7 +260,7 @@ def resetTimer():
 
 
 @app.route('/apiWP/pp', methods=['GET'])
-def resetTimer():
+def pp():
     if checkForHeader() == "denied":
         return "denied"
 
@@ -274,7 +274,7 @@ def resetTimer():
 
 
 @app.route('/apiWP/stop', methods=['GET'])
-def resetTimer():
+def stop():
     if checkForHeader() == "denied":
         return "denied"
 
@@ -288,7 +288,7 @@ def resetTimer():
 
 
 @app.route('/apiWP/shutdown', methods=['GET'])
-def resetTimer():
+def shutdown():
     if checkForHeader() == "denied":
         return "denied"
 
@@ -302,7 +302,7 @@ def resetTimer():
 
 
 @app.route('/apiWP/shutdownstop', methods=['GET'])
-def resetTimer():
+def shutdownstop():
     if checkForHeader() == "denied":
         return "denied"
 
