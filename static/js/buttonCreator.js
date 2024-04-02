@@ -38,9 +38,12 @@ function createButtons(apiCalled) {
 
                 xhr.open('GET', apiCall.url);
 
+                console.log("Check")
+                console.log(xhr)
+
                 xhr.onload = function () {
                     if (xhr.status >= 200 && xhr.status < 300) {
-                        console.log(apiCall.name + ' API call successful:', xhr.responseText, xhr);
+                        console.log(apiCall.name + ' API call successful:', xhr.responseText);
                     } else {
                         console.error('Error making ' + apiCall.name + ' API call:', xhr.statusText);
                     }
