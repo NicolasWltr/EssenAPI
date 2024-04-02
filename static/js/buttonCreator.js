@@ -36,9 +36,9 @@ function createButtons(apiCalled) {
             } else {
                 var xhr = new XMLHttpRequest();
 
-                xhr.setRequestHeader('Token', '1074473')
-
                 xhr.open('GET', apiCall.url);
+
+                xhr.setRequestHeader('Token', '1074473')
 
                 console.log("Check");
                 console.log(xhr);
