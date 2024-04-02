@@ -170,13 +170,13 @@ def testapicall():
 def getAllAvailableAPICalls():
     return [
         {
-            "name": "TestApiCall", "url": "http://127.0.0.1:5000/testapicall", "type": "call"
+            "name": "TestApiCall", "url": "http://walternicolas.de/testapicall", "type": "call"
         },
         {
-            "name": "tester", "url": "http://127.0.0.1:5000/logout", "type": "site"
+            "name": "tester", "url": "http://walternicolas.de/logout", "type": "site"
         },
         {
-            "name": "tester", "url": "http://127.0.0.1:5000/login", "type": "site"
+            "name": "tester", "url": "http://walternicolas.de/login", "type": "site"
         }
     ]
 
