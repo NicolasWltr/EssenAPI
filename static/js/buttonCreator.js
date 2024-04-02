@@ -28,6 +28,8 @@ function createButtons(apiCalled) {
         button.textContent = apiCall.name;
         button.className = 'custom-button';
 
+        console.log("Check");
+
         button.addEventListener('click', function () {
             if (apiCall.type === "site") {
                 window.location.href = apiCall.url;
@@ -38,8 +40,8 @@ function createButtons(apiCalled) {
 
                 xhr.open('GET', apiCall.url);
 
-                console.log("Check")
-                console.log(xhr)
+                console.log("Check");
+                console.log(xhr);
 
                 xhr.onload = function () {
                     if (xhr.status >= 200 && xhr.status < 300) {
