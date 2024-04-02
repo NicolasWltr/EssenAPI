@@ -242,7 +242,7 @@ def essen():
 
     headers = {'Token': '1074473'}
 
-    response = rq.get(url, headers=headers)
+    response = rq.post(url)
 
     return response.text
 
