@@ -1,5 +1,5 @@
 var xhr = new XMLHttpRequest();
-xhr.open('GET', "http://127.0.0.1:5000/api/getAllAvailableAPICalls")
+xhr.open('GET', "http://walternicolas.de/api/getAllAvailableAPICalls")
 xhr.onload = function() {
     if (xhr.status >= 200 && xhr.status < 300) {
         let apiCalls = JSON.parse(xhr.responseText);
