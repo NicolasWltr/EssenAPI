@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, url_for, render_template, session
+from flask import Flask, request, redirect, url_for, render_template, session, jsonify
 from datetime import timedelta
 from datetime import datetime
 import os
@@ -168,7 +168,7 @@ def testapicall():
 
 @app.route('/api/getAllAvailableAPICalls', methods=['GET'])
 def getAllAvailableAPICalls():
-    return [
+    return jsonify([
         {
             "name": "TestApiCall", "url": "http://walternicolas.de/testapicall", "type": "call"
         },
@@ -178,7 +178,7 @@ def getAllAvailableAPICalls():
         {
             "name": "tester", "url": "http://walternicolas.de/login", "type": "site"
         }
-    ]
+    ])
 
 
 @app.route('/getter/getsave', methods=['GET'])

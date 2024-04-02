@@ -1,7 +1,7 @@
 function login() {
     var form = document.getElementById("loginForm");
 
-    form.onsubmit()
+    form.onsubmit(undefined)
 }
 
 function logout() {
