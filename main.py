@@ -58,7 +58,7 @@ def logout():
 def start():
     if checkForSession() == "login":
         return redirect(url_for('login'))
-    return render_template("test.html")
+    return render_template("start.html")
 
 
 @app.route('/load', methods=['GET'])
