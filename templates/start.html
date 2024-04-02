@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <script src="/static/js/loginScript.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+</head>
+<body>
+    <div class="stacked">
+        <div class="start oneone">
+            <div class="fadetooutside">
+                <div class="header">
+                    <p class="textglow">Welcome back</p>
+                </div>
+                <div>
+                    <p class="username textglow">{{ session['currentUser'] }}</p>
+                </div>
+            </div>
+            <div class="fadetooutside">
+                <div style="flex-direction: column" class="content">
+                    <div id="buttonContainer"></div>
+
+                    <br><br><br><br>
+
+                    <div style="display: flex; width: 100%">
+                        <button class="custom-button load-store" onclick="createNew()">Create New</button>
+                        <button class="custom-button load-store" onclick="loadSave()">Load From ID</button>
+                        <button class="custom-button load-store" onclick="deleteID()">Delete Id</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="oneone">
+            <div class="logout" style="margin-top: 30px; margin-right: 40px">
+                <button class="logout custom-button" onclick="logout()">Logout</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="/static/js/buttonCreator.js"></script>
+</html>

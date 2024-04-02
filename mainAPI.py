@@ -3,15 +3,15 @@ import subprocess
 from datetime import timedelta
 from datetime import datetime
 import os, signal
-import winsound
-import win32api
-import win32con
+#import winsound
+# import win32api
+# import win32con
 import json
+
 
 app = Flask(__name__)
 app.secret_key = 'asdfghjklöä'
 app.static_folder = 'static'
-
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 credentials_file_path = os.path.join(current_dir, 'data', 'login.json')
@@ -21,37 +21,11 @@ with open(credentials_file_path) as file:
 
 lastCalled = datetime.now() - timedelta(hours=3)
 
-@app.route('/', methods=['GET'])
-def index():
-    return render_template('index.html')
-
-
-@app.route('/login', methods=['GET'])
-def login():
-    return render_template('login.html')
-
-
-@app.route('/checkLogin', methods=['POST'])
-def checkLogin():
-    usernameFromForm = request.form['username']
-    passwordFromForm = request.form['password']
-
-    for login in logins: 
-        if login['username'] == usernameFromForm:
-            if login['password'] == passwordFromForm:
-                session['currentUser'] = login['username']
-                session['hash'] = hash(login['username']) + hash(login['password'])
-                return render_template('check.html')
-            else:
-                return "Wrong Username and Password Pair"
-
-    return "Wrong Username and Password Pair"
-
 
 @app.route('/essen', methods=['GET'])
 def essen():
     if checkForHeader() == "denied":
-        if not(request.args.get('token') == "MyMumCanUseThisEveryTime"):
+        if not (request.args.get('token') == "MyMumCanUseThisEveryTime"):
             return "access denied"
 
     global lastCalled
@@ -60,7 +34,7 @@ def essen():
         return "Nicolas kann erst wieder gerufen werden am " + nextCalled.date().__str__() + " um " + nextCalled.time().__str__()
     lastCalled = datetime.now()
     subprocess.run([r"script.bat"])
-    winsound.Beep(1000, 1000)
+    #winsound.Beep(1000, 1000)
     response = "Nicolas wurde zum essen gerufen am " + lastCalled.date().__str__() + " um " + lastCalled.time().__str__()
     return response
 
@@ -69,28 +43,28 @@ def essen():
 def resetTimer():
     if checkForHeader() == "denied":
         return "access denied"
-    
+
     global lastCalled
     lastCalled = datetime.now() - timedelta(hours=3)
     return "Timer reseted successfully!"
 
 
-@app.route('/pp', methods=['GET'])
-def playpause():
-    if checkForHeader() == "denied":
-        return "access denied"
-    
-    VK_MEDIA_PLAY_PAUSE = 0xB3
-    win32api.keybd_event(VK_MEDIA_PLAY_PAUSE, 0, 0, 0)
-    win32api.keybd_event(VK_MEDIA_PLAY_PAUSE, 0, win32con.KEYEVENTF_KEYUP, 0)
-    return "Success"
+#@app.route('/pp', methods=['GET'])
+#def playpause():
+#    if checkForHeader() == "denied":
+#        return "access denied"
+#
+#    VK_MEDIA_PLAY_PAUSE = 0xB3
+#    win32api.keybd_event(VK_MEDIA_PLAY_PAUSE, 0, 0, 0)
+#    win32api.keybd_event(VK_MEDIA_PLAY_PAUSE, 0, win32con.KEYEVENTF_KEYUP, 0)
+#    return "Success"
 
 
 @app.route('/stop', methods=['GET'])
 def stop():
     if checkForHeader() == "denied":
         return "access denied"
-    
+
     os.kill(os.getpid(), signal.SIGINT)
     return "Stopped"
 
@@ -99,7 +73,7 @@ def stop():
 def shoutdown():
     if checkForHeader() == "denied":
         return "access denied"
-    
+
     os.system('shutdown -s')
     return "Shutdown!"
 
@@ -108,7 +82,7 @@ def shoutdown():
 def shoutdownstop():
     if checkForHeader() == "denied":
         return "access denied"
-    
+
     os.system('shutdown -a')
     return "Shutdown abgebrochen!"
 
@@ -118,7 +92,8 @@ def checkForSession():
         return "Yes"
     else:
         return "login"
-    
+
+
 def checkForHeader():
     if request.headers.get('Token') == '1074473':
         return "Yes"
@@ -127,5 +102,5 @@ def checkForHeader():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=25565, threaded=True)
-    
+    #app.run(host='0.0.0.0', port=25566, threaded=True)
+    app.run(debug=True, host='0.0.0.0', port=5000)

@@ -3,23 +3,24 @@ import subprocess
 from datetime import timedelta
 from datetime import datetime
 import os, signal
-import winsound
-#import win32api
-#import win32con
+# import winsound
+# import win32api
+# import win32con
 import json
 
 app = Flask(__name__)
 app.secret_key = 'asdfghjklöä'
 app.static_folder = 'static'
 
-
 current_dir = os.path.dirname(os.path.abspath(__file__))
-credentials_file_path = os.path.join(current_dir, 'data', 'login.json')
+login_file_path = os.path.join(current_dir, 'data', 'login.json')
+saver_file_path = os.path.join(current_dir, 'data', 'save.json')
 
-with open(credentials_file_path) as file:
+with open(login_file_path) as file:
     logins = json.load(file)
 
 lastCalled = datetime.now() - timedelta(hours=3)
+
 
 @app.route('/', methods=['GET'])
 def index():
@@ -28,7 +29,9 @@ def index():
 
 @app.route('/login', methods=['GET'])
 def login():
-    return render_template('login.html')
+    if checkForSession() == 'login':
+        return render_template('login.html')
+    return redirect(url_for('start'))
 
 
 @app.route('/checkLogin', methods=['POST'])
@@ -36,81 +39,183 @@ def checkLogin():
     usernameFromForm = request.form['username']
     passwordFromForm = request.form['password']
 
-    for login in logins: 
+    for login in logins:
         if login['username'] == usernameFromForm:
             if login['password'] == passwordFromForm:
                 session['currentUser'] = login['username']
                 session['hash'] = hash(login['username']) + hash(login['password'])
-                return render_template('check.html')
+                return redirect(url_for('start'))
             else:
                 return "Wrong Username and Password Pair"
 
     return "Wrong Username and Password Pair"
 
 
-@app.route('/essen', methods=['GET'])
-def essen():
-    if checkForHeader() == "denied":
-        if not(request.args.get('token') == "MyMumCanUseThisEveryTime"):
-            return "access denied"
-
-    global lastCalled
-    if lastCalled > datetime.now() - timedelta(minutes=30):
-        nextCalled = lastCalled + timedelta(minutes=30)
-        return "Nicolas kann erst wieder gerufen werden am " + nextCalled.date().__str__() + " um " + nextCalled.time().__str__()
-    lastCalled = datetime.now()
-    subprocess.run([r"script.bat"])
-    winsound.Beep(1000, 1000)
-    response = "Nicolas wurde zum essen gerufen am " + lastCalled.date().__str__() + " um " + lastCalled.time().__str__()
-    return response
+@app.route('/logout', methods=['GET'])
+def logout():
+    if session.__contains__('hash'):
+        session.pop('hash')
+    return redirect(url_for('login'))
 
 
-@app.route('/resetTimer', methods=['GET'])
-def resetTimer():
-    if checkForHeader() == "denied":
-        return "access denied"
-    
-    global lastCalled
-    lastCalled = datetime.now() - timedelta(hours=3)
-    return "Timer reseted successfully!"
+@app.route('/start', methods=['GET'])
+def start():
+    if checkForSession() == "login":
+        return redirect(url_for('login'))
+    return render_template("start.html")
 
 
-@app.route('/pp', methods=['GET'])
-def playpause():
-    if checkForHeader() == "denied":
-        return "access denied"
-    
-    VK_MEDIA_PLAY_PAUSE = 0xB3
-    win32api.keybd_event(VK_MEDIA_PLAY_PAUSE, 0, 0, 0)
-    win32api.keybd_event(VK_MEDIA_PLAY_PAUSE, 0, win32con.KEYEVENTF_KEYUP, 0)
-    return "Success"
+@app.route('/load', methods=['GET'])
+def load():
+    if checkForSession() == "login":
+        return redirect(url_for('login'))
+    return render_template("load.html")
 
 
-@app.route('/stop', methods=['GET'])
-def stop():
-    if checkForHeader() == "denied":
-        return "access denied"
-    
-    os.kill(os.getpid(), signal.SIGINT)
-    return "Stopped"
+@app.route('/checkID', methods=['POST'])
+def checkID():
+    if checkForSession() == "login":
+        return redirect(url_for('login'))
+
+    with open(saver_file_path) as file:
+        saves = json.load(file)
+
+    idFromForm = request.form.get('id')
+
+    for save in saves:
+        if save['id'] == idFromForm:
+            session['id'] = idFromForm
+            return render_template("saved.html")
+
+    return redirect(url_for('IDNotPresent'))
 
 
-@app.route('/shutdown', methods=['GET'])
-def shoutdown():
-    if checkForHeader() == "denied":
-        return "access denied"
-    
-    os.system('shutdown -s')
-    return "Shutdown!"
+@app.route('/checkIDCreated', methods=['POST'])
+def checkIDCreated():
+    if checkForSession() == "login":
+        return redirect(url_for('login'))
+
+    id = request.form.get('id')
+
+    with open(saver_file_path) as file:
+        saves = json.load(file)
+        for save in saves:
+            if save['id'] == id:
+                return render_template("alreadyExists.html")
+
+        additional = {
+            "id": id,
+            "input": ''
+        }
+
+        saves.append(additional)
+
+    with open(saver_file_path, 'w') as file:
+        json.dump(saves, file)
+
+    session['id'] = id
+    return render_template("saved.html")
 
 
-@app.route('/shutdownstop', methods=['GET'])
-def shoutdownstop():
-    if checkForHeader() == "denied":
-        return "access denied"
-    
-    os.system('shutdown -a')
-    return "Shutdown abgebrochen!"
+@app.route('/createID', methods=['GET'])
+def createID():
+    if checkForSession() == "login":
+        return redirect(url_for('login'))
+
+    return render_template("createSave.html")
+
+
+@app.route('/IDNotPresent', methods=['GET'])
+def IDNotPresent():
+    if checkForSession() == "login":
+        return redirect(url_for('login'))
+
+    return render_template("wrongID.html")
+
+
+
+@app.route('/deleteID', methods=['GET'])
+def deleteID():
+    if checkForSession() == "login":
+        return redirect(url_for('login'))
+
+    return render_template("deleteID.html")
+
+
+@app.route('/checkForIDdelete', methods=['POST'])
+def checkForIDdelete():
+    if checkForSession() == "login":
+        return redirect(url_for('login'))
+
+    idToDelete = request.form.get('id')
+
+    with open(saver_file_path) as file:
+        saves = json.load(file)
+
+        idOf = 0
+
+        for save in saves:
+            if save['id'] == idToDelete:
+                del saves[idOf]
+                break
+            idOf = idOf+1
+
+    with open(saver_file_path, 'w') as file:
+        json.dump(saves, file)
+
+    return redirect(url_for('start'))
+
+@app.route('/testapicall', methods=['GET'])
+def testapicall():
+    return "API"
+
+
+@app.route('/api/getAllAvailableAPICalls', methods=['GET'])
+def getAllAvailableAPICalls():
+    return [
+        {
+            "name": "TestApiCall", "url": "http://127.0.0.1:5000/testapicall", "type": "call"
+        },
+        {
+            "name": "tester", "url": "http://127.0.0.1:5000/logout", "type": "site"
+        },
+        {
+            "name": "tester", "url": "http://127.0.0.1:5000/login", "type": "site"
+        }
+    ]
+
+
+@app.route('/getter/getsave', methods=['GET'])
+def getSave():
+    if request.headers.get('Token') != 'nivanprpquß24723h780cnß2n1n':
+        return "declined"
+
+    with open(saver_file_path) as file:
+        saves = json.load(file)
+
+    for save in saves:
+        if save['id'] == session['id']:
+            return save['input']
+
+
+@app.route('/setter/setsave', methods=['POST'])
+def setsave():
+    if request.headers.get('Token') != 'nivanprpquß24723h780cnß2n1n':
+        return "declined"
+
+    inputForId = request.args.get("input")
+
+    with open(saver_file_path) as file:
+        saves = json.load(file)
+
+    for save in saves:
+        if save['id'] == session['id']:
+            save['input'] = inputForId
+
+    with open(saver_file_path, 'w') as file:
+        json.dump(saves, file)
+
+    return "saved"
 
 
 def checkForSession():
@@ -118,7 +223,8 @@ def checkForSession():
         return "Yes"
     else:
         return "login"
-    
+
+
 def checkForHeader():
     if request.headers.get('Token') == '1074473':
         return "Yes"
@@ -127,5 +233,4 @@ def checkForHeader():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=25565, threaded=True)
-    
+    app.run(host='0.0.0.0', port=25565, threaded=True, debug=True)

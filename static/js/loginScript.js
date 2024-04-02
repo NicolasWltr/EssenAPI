@@ -3,3 +3,7 @@ function login() {
 
     form.onsubmit()
 }
+
+function logout() {
+    window.location.href = "logout";
+}

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>LOAD</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="login">
+            <h1>LOAD</h1>
+            <br>
+            <form id="loadSave" action="{{ url_for('checkID') }}" method="post">
+                <label for="id">ID:</label>
+                <input class="submit" type="text" id="idForid" name="id">
+                <button class="submit custom-button" style="margin-top: 50px;">Login</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
