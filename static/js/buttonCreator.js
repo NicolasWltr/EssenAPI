@@ -15,15 +15,13 @@ xhr.onload = function() {
 // };
 
 xhr.send();
-
-// Get the container where buttons will be appended
-var buttonContainer = document.getElementById('buttonContainer');
-
-console.log(buttonContainer)
 function createButtons(apiCalled) {
-    console.log(apiCalled)
+    var buttonContainer = document.getElementById('buttonContainer');
     apiCalled.forEach(function (apiCall) {
+
         var button = document.createElement('button');
+
+        buttonContainer.appendChild(button);
 
         button.textContent = apiCall.name;
         button.className = 'custom-button';
