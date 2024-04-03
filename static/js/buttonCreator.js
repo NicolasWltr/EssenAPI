@@ -27,6 +27,7 @@ function createButtons(apiCalled) {
         buttonContainer.appendChild(button);
 
         button.textContent = apiCall.name;
+        button.type = "button";
         button.className = 'custom-button load-store';
 
         button.addEventListener('click', function () {
