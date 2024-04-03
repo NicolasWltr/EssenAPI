@@ -17,6 +17,9 @@ xhr.onload = function() {
 xhr.send();
 function createButtons(apiCalled) {
     var buttonContainer = document.getElementById('buttonContainer');
+
+    buttonContainer.style.display = 'flex';
+
     apiCalled.forEach(function (apiCall) {
 
         var button = document.createElement('button');
@@ -24,7 +27,7 @@ function createButtons(apiCalled) {
         buttonContainer.appendChild(button);
 
         button.textContent = apiCall.name;
-        button.className = 'custom-button';
+        button.className = 'custom-button load-store';
 
         button.addEventListener('click', function () {
             if (apiCall.type === "site") {
