@@ -69,7 +69,10 @@ function deleteID() {
 function appendToOutput(Resp) {
     var outputfield = document.getElementById('output');
 
+    console.log(outputfield.innerHTML);
+
     if (outputfield.innerHTML === '<br>') {
+        console.log("hier")
         outputfield.innerHTML = Resp;
     }else {
         outputfield.innerHTML = Resp + '<br>' + outputfield.innerHTML;
