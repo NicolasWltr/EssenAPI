@@ -39,13 +39,13 @@ function createButtons(apiCalled) {
                 xhr.onload = function () {
                     console.log("hi")
                     console.log(xhr.responseText);
-                    appendToOutput("<br>");
                     appendToOutput(xhr.responseText);
+                    appendToOutput("<br>");
                 };
 
                 xhr.onerror = function () {
-                    appendToOutput("<br>");
                     appendToOutput(('Error making ' + apiCall.name + ' API call:' + xhr.statusText));
+                    appendToOutput("<br>");
                 };
 
                 xhr.send();
