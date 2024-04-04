@@ -186,6 +186,23 @@ def getAllAvailableAPICalls():
     ])
 
 
+@app.route('/getter/getAllSaves', methods=['GET'])
+def getAllSaves():
+    if request.headers.get('Token') != 'nivanprpquß24723h780cnß2n1n':
+        return "declined"
+
+    with open(saver_file_path) as file:
+        saves = json.load(file)
+
+    saveIDs = []
+
+    for save in saves:
+        saveIDs.append(save['id'])
+
+    return jsonify(saveIDs)
+
+
+
 @app.route('/getter/getsave', methods=['GET'])
 def getSave():
     if request.headers.get('Token') != 'nivanprpquß24723h780cnß2n1n':

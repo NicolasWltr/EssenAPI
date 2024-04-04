@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="height: 99%;">
 <head>
     <meta charset="UTF-8">
     <title>Delete ID</title>
     <link rel="stylesheet" type="text/css" href="/static/css/style.css">
     <link rel="icon" href="{{ url_for('static', filename='Ico.ico') }}" type="image/x-icon">
 </head>
-<body>
+<body style="height: 100%;">
+    <button type="button" class="start-button custom-button" onclick="window.location.href = '/..';">BACK</button>
     <div class="container">
         <div class="login">
             <h1>Delete ID</h1>
@@ -17,6 +18,9 @@
                 <button type="submit" class="submit custom-button" style="margin-top: 50px;">Login</button>
             </form>
         </div>
+
+        {% include 'allSaves.html' %}
+
     </div>
 </body>
 </html>

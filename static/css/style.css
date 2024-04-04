@@ -77,7 +77,10 @@ p {
 
 .container {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
 }
 
 .custom-button {

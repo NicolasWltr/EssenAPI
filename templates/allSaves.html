@@ -1,0 +1,43 @@
+<div class="allSaves" id="allSaves" style="display: flex; flex-direction: column; align-self: start; margin-bottom: 10px;"></div>
+<script>
+    var div = document.getElementById("allSaves");
+
+    var xhr = new XMLHttpRequest();
+
+    //xhr.open('GET', "http://walternicolas.de/getter/getAllSaves");
+    xhr.open('GET', "http://127.0.0.1:5000/getter/getAllSaves");
+    xhr.setRequestHeader("token", 'nivanprpquß24723h780cnß2n1n')
+    xhr.onload = function () {
+        if (xhr.status >= 200 && xhr.status < 300) {
+            let response = JSON.parse(xhr.responseText);
+
+            if (response === "declined") {
+                window.location.href = 'IDNotPresent'
+                return;
+            }
+
+            var header = document.createElement('p');
+
+            header.innerHTML = "All IDs";
+
+            header.style.fontSize = "20px";
+            header.style.fontWeight = "bold";
+
+            div.appendChild(header);
+
+            response.forEach(function (resp) {
+                var label = document.createElement('p');
+
+                label.innerHTML = resp;
+                label.style.marginLeft = "10px";
+
+                div.appendChild(label);
+            });
+
+        } else {
+            console.log('error')
+        }
+    }
+    xhr.send();
+
+</script>
