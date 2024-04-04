@@ -1,3 +1,15 @@
+
+    // Das Element abrufen
+var editableDiv = document.getElementById('textfield');
+
+editableDiv.addEventListener('keydown', function(event) {
+    if (event.code === "Tab") {
+        event.preventDefault();
+        document.execCommand('insertText', false, '\t');
+    }
+});
+
+
 var text = document.getElementById('textfield');
 
 var xhr = new XMLHttpRequest();
