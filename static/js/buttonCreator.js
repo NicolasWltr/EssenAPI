@@ -69,13 +69,12 @@ function deleteID() {
 function appendToOutput(Resp) {
     var outputfield = document.getElementById('output');
 
-    console.log(outputfield.innerHTML);
+    var time = Date.now().toString();
 
     if (outputfield.innerHTML === '<br>') {
-        console.log("hier")
-        outputfield.innerHTML = Resp;
+        outputfield.innerHTML = time + ': ' + Resp;
     }else {
-        outputfield.innerHTML = Resp + '<br>' + outputfield.innerHTML;
+        outputfield.innerHTML = time + ': ' + Resp + '<br>' + outputfield.innerHTML;
     }
 
 }
