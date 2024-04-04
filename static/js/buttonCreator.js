@@ -40,12 +40,10 @@ function createButtons(apiCalled) {
                     console.log("hi")
                     console.log(xhr.responseText);
                     appendToOutput(xhr.responseText);
-                    appendToOutput("<br>");
                 };
 
                 xhr.onerror = function () {
                     appendToOutput(('Error making ' + apiCall.name + ' API call:' + xhr.statusText));
-                    appendToOutput("<br>");
                 };
 
                 xhr.send();
@@ -71,6 +69,10 @@ function deleteID() {
 function appendToOutput(Resp) {
     var outputfield = document.getElementById('output');
 
-    outputfield.innerHTML = outputfield.innerHTML + Resp;
+    if (outputfield.innerHTML === '<br>') {
+        outputfield.innerHTML = Resp;
+    }else {
+        outputfield.innerHTML = Resp + '<br>' + outputfield.innerHTML;
+    }
 
 }
