@@ -69,12 +69,17 @@ function deleteID() {
 function appendToOutput(Resp) {
     var outputfield = document.getElementById('output');
 
-    var time = Date();
+    var datetime = new Date();
+
+    var date = datetime.toDateString();
+    var time = datetime.toTimeString().split((' ')[0])
+
+    var formatted = date + ' ' + time;
 
     if (outputfield.innerHTML === '<br>') {
-        outputfield.innerHTML = time + ': ' + Resp;
+        outputfield.innerHTML = formatted + ': ' + Resp;
     }else {
-        outputfield.innerHTML = time + ': ' + Resp + '<br>' + outputfield.innerHTML;
+        outputfield.innerHTML = formatted + ': ' + Resp + '<br>' + outputfield.innerHTML;
     }
 
 }
