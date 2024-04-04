@@ -69,7 +69,7 @@ function deleteID() {
 function appendToOutput(Resp) {
     var outputfield = document.getElementById('output');
 
-    var time = Date.now().toString();
+    var time = Date.now();
 
     if (outputfield.innerHTML === '<br>') {
         outputfield.innerHTML = time + ': ' + Resp;
