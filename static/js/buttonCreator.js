@@ -9,10 +9,6 @@ xhr.onload = function() {
     }
 };
 
-        // Define the behavior for error
-// xhr.onerror = function() {
-//     console.error('Error making ' + apiCall.name + ' API call:', xhr.statusText);
-// };
 
 xhr.send();
 function createButtons(apiCalled) {
@@ -40,17 +36,14 @@ function createButtons(apiCalled) {
 
                 xhr.setRequestHeader('Token', '1074473')
 
-                // xhr.onload = function () {
-                //     if (xhr.status >= 200 && xhr.status < 300) {
-                //         console.log(apiCall.name + ' API call successful:', xhr.responseText);
-                //     } else {
-                //         console.error('Error making ' + apiCall.name + ' API call:', xhr.statusText);
-                //     }
-                // };
-                //
-                // xhr.onerror = function () {
-                //     console.error('Error making ' + apiCall.name + ' API call:', xhr.statusText);
-                // };
+                xhr.onload = function () {
+                    appendToOutput(xhr.responseText);
+                };
+
+                xhr.onerror = function () {
+
+                    appendToOutput(('Error making ' + apiCall.name + ' API call:' + xhr.statusText));
+                };
 
                 xhr.send();
             }
@@ -70,4 +63,11 @@ function createNew() {
 
 function deleteID() {
     window.location.href = "deleteID";
+}
+
+function appendToOutput(Resp) {
+    var outputfield = document.getElementById('output');
+
+    outputfield.innerHTML = outputfield.innerHTML + Resp;
+
 }
