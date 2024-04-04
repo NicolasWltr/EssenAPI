@@ -72,7 +72,7 @@ function appendToOutput(Resp) {
     var datetime = new Date();
 
     var date = datetime.toDateString();
-    var time = datetime.toTimeString().split((' ')[0])
+    var time = datetime.toTimeString().split(' ')[0];
 
     var formatted = date + ' ' + time;
 
