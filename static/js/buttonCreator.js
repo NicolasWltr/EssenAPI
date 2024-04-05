@@ -37,14 +37,17 @@ function createButtons(apiCalled) {
                 xhr.setRequestHeader('Token', '1074473')
 
                 xhr.onload = function () {
+                    console.log("onload");
                     appendToOutput(xhr.responseText);
                 };
 
                 xhr.ontimeout = function () {
+                    console.log("ontimeout");
                     appendToOutput("PC ist nicht erreichbar oder Aus!");
                 }
 
                 xhr.onerror = function () {
+                    console.log("onerror");
                     appendToOutput(('Error making ' + apiCall.name + ' API call:' + xhr.statusText));
                 };
 
