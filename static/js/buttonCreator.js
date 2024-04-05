@@ -39,9 +39,11 @@ function createButtons(apiCalled) {
                 xhr.onload = function () {
                     console.log("onload");
 
-                    console.log(xhr.status);
-
-                    appendToOutput(xhr.responseText);
+                    if (xhr.status === 500) {
+                        appendToOutput("PC ist nicht erreichbar oder Aus!");
+                    } else {
+                        appendToOutput(xhr.responseText);
+                    }
                 };
 
                 xhr.ontimeout = function () {
