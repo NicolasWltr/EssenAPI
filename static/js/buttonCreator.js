@@ -38,6 +38,9 @@ function createButtons(apiCalled) {
 
                 xhr.onload = function () {
                     console.log("onload");
+
+                    console.log(xhr.status);
+
                     appendToOutput(xhr.responseText);
                 };
 
