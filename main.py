@@ -4,6 +4,7 @@ from datetime import datetime
 import os
 import json
 import requests as rq
+import time
 
 app = Flask(__name__)
 app.secret_key = 'asdfghjklöä'
