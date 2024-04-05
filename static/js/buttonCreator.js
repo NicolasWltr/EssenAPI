@@ -41,7 +41,7 @@ function createButtons(apiCalled) {
                 };
 
                 xhr.ontimeout = function () {
-                    appendToOutput("PC ist nicht erreichbar oder aus!");
+                    appendToOutput("PC ist nicht erreichbar oder Aus!");
                 }
 
                 xhr.onerror = function () {
