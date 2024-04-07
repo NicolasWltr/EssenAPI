@@ -1,13 +1,18 @@
+import time
+
 from flask import Flask, request, redirect, url_for, render_template, session, jsonify
 from datetime import timedelta
 from datetime import datetime
 import os
 import json
 import requests as rq
+import threading
+import chatbot as cb
 
 app = Flask(__name__)
 app.secret_key = 'asdfghjklöä'
 app.static_folder = 'static'
+
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 login_file_path = os.path.join(current_dir, 'data', 'login.json')
@@ -41,6 +46,7 @@ def checkLogin():
             if login['password'] == passwordFromForm:
                 session['currentUser'] = login['username']
                 session['hash'] = hash(login['username']) + hash(login['password'])
+                cb.send(session['currentUser'] + ' has logged in')
                 return redirect(url_for('start'))
             else:
                 return "Wrong Username and Password Pair"
@@ -52,6 +58,7 @@ def checkLogin():
 def logout():
     if session.__contains__('hash'):
         session.pop('hash')
+        cb.send(session['currentUser'] + ' has logged out')
     return redirect(url_for('login'))
 
 
@@ -256,12 +263,16 @@ def essen():
     if checkForHeader() == "denied":
         if not (request.args.get('token') == "MyMumCanUseThisEveryTime"):
             return "denied"
+        else:
+            session['currentUser'] = 'Mama'
 
     url = "http://192.168.178.72:25565/essen"
 
     headers = {'Token': '1074473'}
 
     response = rq.get(url, headers=headers)
+
+    cb.send(session['currentUser'] + ' hat zum Essen gerufen mit der Antwort ' + response.text)
 
     return response.text
 
@@ -277,6 +288,8 @@ def resetTimer():
 
     response = rq.get(url, headers=headers)
 
+    cb.send(session['currentUser'] + ' hat den Timer resettet mit der Antwort ' + response.text)
+
     return response.text
 
 
@@ -290,6 +303,8 @@ def pp():
     headers = {'Token': '1074473'}
 
     response = rq.get(url, headers=headers)
+
+    cb.send(session['currentUser'] + ' hat Play/Pause gedrückt mit der Antwort ' + response.text)
 
     return response.text
 
@@ -305,6 +320,8 @@ def stop():
 
     response = rq.get(url, headers=headers)
 
+    cb.send(session['currentUser'] + ' hat den Endpunkt am PC gestoppt mit der Antwort ' + response.text)
+
     return response.text
 
 
@@ -319,6 +336,8 @@ def shutdown():
 
     response = rq.get(url, headers=headers)
 
+    cb.send(session['currentUser'] + ' hat den Computer heruntergefahren mit der Antwort ' + response.text)
+
     return response.text
 
 
@@ -332,6 +351,8 @@ def shutdownstop():
     headers = {'Token': '1074473'}
 
     response = rq.get(url, headers=headers)
+
+    cb.send(session['currentUser'] + ' hat das herunterfahren abgebrochen mit der Antwort ' + response.text)
 
     return response.text
 
