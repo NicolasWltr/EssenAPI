@@ -359,7 +359,7 @@ def shutdownstop():
 
 @app.route('/test')
 def test():
-    return 'hi'
+    return 'tschau'
 
 
 if __name__ == '__main__':
