@@ -270,9 +270,11 @@ def essen():
 
     headers = {'Token': '1074473'}
 
+    cb.send(session['currentUser'] + ' hat zum Essen gerufen')
+
     response = rq.get(url, headers=headers)
 
-    cb.send(session['currentUser'] + ' hat zum Essen gerufen mit der Antwort ' + response.text)
+    cb.send('Antwort => ' + response.text)
 
     return response.text
 
@@ -286,9 +288,11 @@ def resetTimer():
 
     headers = {'Token': '1074473'}
 
+    cb.send(session['currentUser'] + ' hat den Timer resettet')
+
     response = rq.get(url, headers=headers)
 
-    cb.send(session['currentUser'] + ' hat den Timer resettet mit der Antwort ' + response.text)
+    cb.send('Antwort => ' + response.text)
 
     return response.text
 
@@ -302,9 +306,11 @@ def pp():
 
     headers = {'Token': '1074473'}
 
+    cb.send(session['currentUser'] + ' hat Play/Pause gedrückt')
+
     response = rq.get(url, headers=headers)
 
-    cb.send(session['currentUser'] + ' hat Play/Pause gedrückt mit der Antwort ' + response.text)
+    cb.send('Antwort => ' + response.text)
 
     return response.text
 
@@ -318,9 +324,11 @@ def stop():
 
     headers = {'Token': '1074473'}
 
+    cb.send(session['currentUser'] + ' hat den Endpunkt am PC gestoppt')
+
     response = rq.get(url, headers=headers)
 
-    cb.send(session['currentUser'] + ' hat den Endpunkt am PC gestoppt mit der Antwort ' + response.text)
+    cb.send('Antwort => ' + response.text)
 
     return response.text
 
@@ -334,9 +342,11 @@ def shutdown():
 
     headers = {'Token': '1074473'}
 
+    cb.send(session['currentUser'] + ' hat den Computer heruntergefahren')
+
     response = rq.get(url, headers=headers)
 
-    cb.send(session['currentUser'] + ' hat den Computer heruntergefahren mit der Antwort ' + response.text)
+    cb.send('Antwort => ' + response.text)
 
     return response.text
 
@@ -350,9 +360,11 @@ def shutdownstop():
 
     headers = {'Token': '1074473'}
 
+    cb.send(session['currentUser'] + ' hat das herunterfahren abgebrochen')
+
     response = rq.get(url, headers=headers)
 
-    cb.send(session['currentUser'] + ' hat das herunterfahren abgebrochen mit der Antwort ' + response.text)
+    cb.send('Antwort => ' + response.text)
 
     return response.text
 
