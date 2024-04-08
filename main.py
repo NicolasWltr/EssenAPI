@@ -34,10 +34,10 @@ def login():
     if checkForSession() == 'login':
         return render_template('login.html')
 
-    if session.__contains__('loginerror'):
+    #if session.__contains__('loginerror'):
         return redirect(url_for('start', error=session['loginerror'], username=session['username']))
 
-    return redirect(url_for('start'))
+    #return redirect(url_for('start'))
 
 
 @app.route('/checkLogin', methods=['POST'])
