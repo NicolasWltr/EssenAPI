@@ -24,7 +24,7 @@
     </div>
     {% if session['loginerror'] %}
         <script>
-            alert("Hallo");
+            alert({{ session['loginerror'] }});
         </script>
     {% endif %}
 </body>
