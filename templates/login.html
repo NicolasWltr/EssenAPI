@@ -24,14 +24,9 @@
     </div>
     <script>
         console.log({{ session['loginerror'] }})
-        if ({{ session['loginerror'] }} != null) {
+        if ("{{ session['loginerror'] }}" !== "") {
             alert("{{ session['loginerror'] }}");
         }
     </script>
-    {% if session['loginerror'] %}
-        <script>
-            alert("{{ session['loginerror'] }}");
-        </script>
-    {% endif %}
 </body>
 </html>
