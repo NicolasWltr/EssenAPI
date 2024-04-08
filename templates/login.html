@@ -23,7 +23,7 @@
         </div>
     </div>
     <script>
-        console.log({{ session['loginerror'] }})
+        console.log("{{ session['loginerror'] }}");
         if ("{{ session['loginerror'] }}" !== "") {
             alert("{{ session['loginerror'] }}");
         }
