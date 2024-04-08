@@ -22,12 +22,10 @@
             </form>
         </div>
     </div>
-    <script>
-        console.log(sessionStorage.getItem('loginerror'));
-        console.log({{ session['loginerror'] }});
-        if(sessionStorage.getItem('error') != null) {
-            alert(sessionStorage.getItem('error'));
-        }
-    </script>
+    {% if session['loginerror'] %}
+        <script>
+            alert("Hallo");
+        </script>
+    {% endif %}
 </body>
 </html>
