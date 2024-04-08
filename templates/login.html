@@ -10,7 +10,7 @@
 <body>
     {% if error %}
         <script>
-            alert("{{ error }}");
+            alert("{{ session['error'] }}");
         </script>
     {% endif %}
     <div class="container">
@@ -19,7 +19,7 @@
             <br>
             <form id="loginForm" action="{{ url_for('checkLogin') }}" method="post">
                 <label for="username">Username:</label>
-                <input class="submit" type="text" id="username" name="username" value = {{ username }}>
+                <input class="submit" type="text" id="username" name="username" value = {{ session['usernameFromForm'] }}>
                 <label for="password">Password:</label>
                 <input class="submit" type="password" id="password" name="password">
                 
