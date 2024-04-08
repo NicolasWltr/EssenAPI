@@ -8,9 +8,6 @@
     <link rel="icon" href="{{ url_for('static', filename='Ico.ico') }}" type="image/x-icon">
 </head>
 <body>
-    <script>
-        alert("hallo")
-    </script>
     <div class="container">
         <div class="login">
             <h1>Login</h1>
@@ -20,10 +17,15 @@
                 <input class="submit" type="text" id="username" name="username" value = {{ session['usernameFromForm'] }}>
                 <label for="password">Password:</label>
                 <input class="submit" type="password" id="password" name="password">
-                
+
                 <button type="submit" class="submit custom-button" style="margin-top: 50px;" onClick="login()">Login</button>
             </form>
         </div>
     </div>
+    <script>
+        if(sessionStorage.getItem('error') != null) {
+            alert(sessionStorage.getItem('error'));
+        }
+    </script>
 </body>
 </html>
