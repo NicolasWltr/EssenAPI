@@ -23,7 +23,8 @@
         </div>
     </div>
     <script>
-        console.log(sessionStorage.getItem('error'))
+        console.log(sessionStorage.getItem('error'));
+        console.log({{ error }});
         if(sessionStorage.getItem('error') != null) {
             alert(sessionStorage.getItem('error'));
         }
