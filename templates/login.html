@@ -8,13 +8,18 @@
     <link rel="icon" href="{{ url_for('static', filename='Ico.ico') }}" type="image/x-icon">
 </head>
 <body>
+    {% if error %}
+        <script>
+            alert("{{ error }}");
+        </script>
+    {% endif %}
     <div class="container">
         <div class="login">
             <h1>Login</h1>
             <br>
             <form id="loginForm" action="{{ url_for('checkLogin') }}" method="post">
                 <label for="username">Username:</label>
-                <input class="submit" type="text" id="username" name="username">
+                <input class="submit" type="text" id="username" name="username" value = {{ username }}>
                 <label for="password">Password:</label>
                 <input class="submit" type="password" id="password" name="password">
                 

@@ -33,6 +33,10 @@ def index():
 def login():
     if checkForSession() == 'login':
         return render_template('login.html')
+
+    if session.__contains__('loginerror'):
+        return redirect(url_for('start', error=session['loginerror'], username=session['username']))
+
     return redirect(url_for('start'))
 
 
@@ -49,9 +53,13 @@ def checkLogin():
                 cb.send(session['currentUser'] + ' has logged in')
                 return redirect(url_for('start'))
             else:
-                return "Wrong Username and Password Pair"
+                session['usernameFromForm'] = usernameFromForm
+                session['loginerror'] = 'Invalid username or password'
+                return redirect(url_for('login'))
 
-    return "Wrong Username and Password Pair"
+    session['usernameFromForm'] = usernameFromForm
+    session['loginerror'] = 'Invalid username or password'
+    return redirect(url_for('login'))
 
 
 @app.route('/logout', methods=['GET'])
