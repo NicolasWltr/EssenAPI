@@ -8,9 +8,9 @@
     <link rel="icon" href="{{ url_for('static', filename='Ico.ico') }}" type="image/x-icon">
 </head>
 <body>
-    {% if error %}
+    {% if session['error'] %}
         <script>
-            alert("{{ session['error'] }}");
+            alert({{ session['error'] }});
         </script>
     {% endif %}
     <div class="container">
