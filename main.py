@@ -1,17 +1,17 @@
-import time
-
 from flask import Flask, request, redirect, url_for, render_template, session, jsonify
+from flask_socketio import SocketIO
 from datetime import timedelta
 from datetime import datetime
 import os
 import json
 import requests as rq
-import threading
 import chatbot as cb
 
 app = Flask(__name__)
 app.secret_key = 'asdfghjklöä'
 app.static_folder = 'static'
+
+socket = SocketIO(app)
 
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -34,10 +34,7 @@ def login():
     if checkForSession() == 'login':
         return render_template('login.html')
 
-    #if session.__contains__('loginerror'):
     return redirect(url_for('start', error=session['loginerror'], username=session['username']))
-
-    #return redirect(url_for('start'))
 
 
 @app.route('/checkLogin', methods=['POST'])
@@ -217,7 +214,6 @@ def getAllSaves():
     return jsonify(saveIDs)
 
 
-
 @app.route('/getter/getsave', methods=['GET'])
 def getSave():
     if request.headers.get('Token') != 'nivanprpquß24723h780cnß2n1n':
@@ -378,4 +374,7 @@ def shutdownstop():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', threaded=True)
+    socket.run(app, host='0.0.0.0', threaded=True)
+
+
+from WebSocket import socket
