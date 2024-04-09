@@ -372,7 +372,14 @@ def shutdownstop():
     return response.text
 
 
-from WebSocket import *
+@socket.on('connect')
+def connect():
+    print("Client")
+
+
+@socket.on('checker')
+def checker(data):
+    socket.send(data)
 
 
 if __name__ == '__main__':
