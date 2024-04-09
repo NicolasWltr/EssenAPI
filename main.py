@@ -373,8 +373,18 @@ def shutdownstop():
     return response.text
 
 
+@socket.on('connect')
+def connect():
+    print("Client")
+
+
+@socket.on('checker')
+def checker(data):
+    socket.send(data)
+
+
 if __name__ == '__main__':
     socket.run(app, host='0.0.0.0', threaded=True)
 
 
-from WebSocket import socket
+#from WebSocket import socket
