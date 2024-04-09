@@ -1,5 +1,4 @@
 from flask import Flask, request, redirect, url_for, render_template, session, jsonify
-from flask_socketio import SocketIO
 from datetime import timedelta
 from datetime import datetime
 import os
@@ -10,8 +9,6 @@ import chatbot as cb
 app = Flask(__name__)
 app.secret_key = 'asdfghjklöä'
 app.static_folder = 'static'
-
-socket = SocketIO(app)
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 login_file_path = os.path.join(current_dir, 'data', 'login.json')
@@ -376,17 +373,7 @@ def shutdownstop():
     return response.text
 
 
-@socket.on('connect')
-def connect():
-    print("Client")
-
-
-@socket.on('checker')
-def checker(data):
-    socket.send(data)
-
-
 if __name__ == '__main__':
-    socket.run(app,host="0.0.0.0")
+    app.run(host='0.0.0.0', threaded=True)
 
 
