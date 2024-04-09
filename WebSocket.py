@@ -1,5 +1,6 @@
 from main import socket
 
+print("Hi")
 
 @socket.on('connect')
 def connect():
