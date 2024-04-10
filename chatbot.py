@@ -1,7 +1,5 @@
 import requests
-
-bot_token = '7061578843:AAH57p4NPAyeruvYYyO_uZ_Mr5kuCMffiKA'
-chat_id = '6791675554'
+from BotCreds import bot_token, chat_id
 
 url = f'https://api.telegram.org/bot{bot_token}/sendMessage'
 
