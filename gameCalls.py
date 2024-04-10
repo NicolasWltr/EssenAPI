@@ -1,7 +1,7 @@
 from main import app
 
 
-@app.route('koopgames/hostGame', methods=['GET'])
+@app.route('/koopgames/hostGame', methods=['GET'])
 def hostGame():
     return "Game Pin"
 

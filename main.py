@@ -1,4 +1,5 @@
 from flask import Flask, request, redirect, url_for, render_template, session, jsonify
+from flask_socketio import SocketIO
 from datetime import timedelta
 from datetime import datetime
 import os
@@ -9,6 +10,8 @@ import chatbot as cb
 app = Flask(__name__)
 app.secret_key = 'asdfghjklöä'
 app.static_folder = 'static'
+
+socketio = SocketIO(app)
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 login_file_path = os.path.join(current_dir, 'data', 'login.json')
@@ -372,9 +375,27 @@ def shutdownstop():
 
     return response.text
 
+
+@socketio.on('connect')
+def connect():
+    print('Client connected')
+
+
+@socketio.on('disconnect')
+def disconnect():
+    print('Client disconnected')
+
+
+@socketio.on('hello')
+def hello(message):
+    print(message)
+    socketio.emit('hello', message)
+
+
 import gameCalls
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', threaded=True)
+    socketio.run(app, debug=True, host='0.0.0.0', port=5000)
+    # app.run(host='0.0.0.0', threaded=True)
 
 
