@@ -19,8 +19,8 @@ def connect():
 
 @socketio.on('hello')
 def hello(message):
-    print('Message')
-    socketio.emit('hello', "Antwort")
+    print(message)
+    socketio.emit('hello', message)
 
 
 if __name__ == '__main__':

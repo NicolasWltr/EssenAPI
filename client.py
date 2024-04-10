@@ -15,10 +15,16 @@ def disconnect():
     print('Disconnected from server')
 
 
-# Connect to the server
-sio.connect('http://walternicolas.de:80')
+@sio.event
+def hello(message):
+    print(message)
 
+
+# Connect to the server
+sio.connect('ws://walternicolas.de:80')
+print('con')
+print('fin')
 sio.emit('hello', "Data")
 # Wait for the connection to establish
-sio.wait()
 
+sio.wait()
