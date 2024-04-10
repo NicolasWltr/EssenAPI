@@ -17,7 +17,8 @@ def disconnect():
 
 # Connect to the server
 sio.connect('http://walternicolas.de:80')
-sio.emit('hello', "Data")
 
+sio.emit('hello', "Data")
 # Wait for the connection to establish
 sio.wait()
+

@@ -20,7 +20,7 @@ def connect():
 @socketio.on('hello')
 def hello(message):
     print('Message')
-    socketio.emit('hello', "Antwort", broadcast=True)
+    socketio.emit('hello', "Antwort")
 
 
 if __name__ == '__main__':
