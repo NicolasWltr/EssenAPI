@@ -1,20 +1,18 @@
-from main import socketio
+from flask import request
 
 
-print('Hi')
+def init(socketio):
+    @socketio.on('connect')
+    def connect():
+        sid = request.sid
+        print('Client connected', sid)
 
+    @socketio.on('disconnect')
+    def disconnect():
+        print('Client disconnected')
 
-@socketio.on('connect')
-def connect():
-    print('Client connected')
-
-
-@socketio.on('disconnect')
-def disconnect():
-    print('Client disconnected')
-
-
-@socketio.on('hello')
-def hello(message):
-    print(message)
-    socketio.emit('hello', message)
+    @socketio.on('hello')
+    def hello(message):
+        sid = request.sid
+        print(message, sid)
+        socketio.emit('hello', message, room=sid)
