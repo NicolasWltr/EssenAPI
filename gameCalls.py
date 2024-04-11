@@ -1,11 +1,17 @@
-from main import app
+from main import socketio
 
 
-@app.route('/koopgames/hostGame', methods=['GET'])
-def hostGame():
-    return "Game Pin"
+@socketio.on('connect')
+def connect():
+    print('Client connected')
 
 
-@app.route('/koopgames/joinGame', methods=['POST'])
-def join_game():
-    return "Join Game Pin"
+@socketio.on('disconnect')
+def disconnect():
+    print('Client disconnected')
+
+
+@socketio.on('hello')
+def hello(message):
+    print(message)
+    socketio.emit('hello', message)
