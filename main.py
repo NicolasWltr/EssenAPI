@@ -11,7 +11,7 @@ app = Flask(__name__)
 app.secret_key = 'asdfghjklöä'
 app.static_folder = 'static'
 
-socketio = SocketIO(app)
+socketio = SocketIO(app, cors_allowed_origins='http://walternicolas.de')
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 login_file_path = os.path.join(current_dir, 'data', 'login.json')
