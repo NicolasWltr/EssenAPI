@@ -17,7 +17,7 @@ def init(socketio):
         print(message, sid)
         socketio.emit('hello', message, room=sid)
 
-    @socketio.on('helloAll')
+    @socketio.on('helloAl')
     def helloAll(message):
         sid = request.sid
         print(message, sid)
