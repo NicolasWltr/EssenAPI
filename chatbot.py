@@ -1,5 +1,5 @@
 import requests
-from BotCreds import bot_token, chat_id
+from Creds.BotCreds import bot_token, chat_id
 
 url = f'https://api.telegram.org/bot{bot_token}/sendMessage'
 
