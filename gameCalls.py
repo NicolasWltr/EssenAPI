@@ -1,6 +1,9 @@
 from main import socketio
 
 
+print('Hi')
+
+
 @socketio.on('connect')
 def connect():
     print('Client connected')
