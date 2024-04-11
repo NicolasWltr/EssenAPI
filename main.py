@@ -13,6 +13,8 @@ app.static_folder = 'static'
 
 socketio = SocketIO(app, cors_allowed_origins='ws://walternicolas.de:80')
 
+import gameCalls
+
 current_dir = os.path.dirname(os.path.abspath(__file__))
 login_file_path = os.path.join(current_dir, 'data', 'login.json')
 saver_file_path = os.path.join(current_dir, 'data', 'save.json')
@@ -374,11 +376,6 @@ def shutdownstop():
     cb.send('Antwort => ' + response.text)
 
     return response.text
-
-
-import gameCalls
-
-gameCalls.hello.__call__("Hi")
 
 
 if __name__ == '__main__':
