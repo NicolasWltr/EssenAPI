@@ -23,6 +23,7 @@ def init(socketio):
     def newGamePin():
         sid = request.sid
         pin = genPin()
+        print(pin)
         gamePins.append(sid)
         socketio.emit('gamePin', pin, room=sid)
 
