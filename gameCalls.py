@@ -48,6 +48,9 @@ def init(socketio):
     @socketio.on('chatToGame')
     def chatToGame(mes):
         sid = request.sid
+
+        mes = sid + "-> " + mes
+
         gp = ""
         for game in gamePins:
             for user in gamePins[game]:
