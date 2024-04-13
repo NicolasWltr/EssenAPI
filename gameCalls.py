@@ -78,3 +78,19 @@ def init(socketio):
 
         for pin in pinsToRem:
             del gamePins[pin]
+
+        removeUnusedSidFromGame()
+
+    def removeUnusedSidFromGame():
+        sidToRemove = {}
+        for game in gamePins:
+            for user in gamePins[game]:
+                if user not in clients:
+                    if len(sidToRemove[user]) == 0: sidToRemove[user] = []
+                    sidToRemove[user].append(game)
+
+        for user in sidToRemove:
+            for game in sidToRemove[user]:
+                gamePins[game].remove(user)
+
+
