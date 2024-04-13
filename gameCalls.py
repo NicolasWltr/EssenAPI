@@ -42,11 +42,8 @@ def init(socketio):
             return
 
         print('Connecting to game pin', pin)
-
-        mesAllMem(pin)
-
         gamePins[pin].append(sid)
-        socketio.emit('connectToGamePin', 1, room=sid)
+        mesAllMem(pin)
 
     def mesAllMem(pin):
         for user in gamePins[pin]:
