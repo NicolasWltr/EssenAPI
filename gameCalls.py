@@ -34,10 +34,14 @@ def init(socketio):
     def connectToPin(pin):
         sid = request.sid
         if pin not in gamePins:
+            print('Pin not found', pin)
             socketio.emit('connectToGamePin', "No game pins found", room=sid)
         if len(gamePins[pin]) >= 2:
+            print('Game full', pin)
             socketio.emit('connectToGamePin', "No game pins found", room=sid)
             return
+
+        print('Connecting to game pin', pin)
 
         gamePins[pin].append(sid)
         socketio.emit('connectToGamePin', pin, room=sid)
