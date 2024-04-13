@@ -86,7 +86,7 @@ def init(socketio):
         for game in gamePins:
             for user in gamePins[game]:
                 if user not in clients:
-                    if len(sidToRemove[user]) == 0: sidToRemove[user] = []
+                    if not sidToRemove.__contains__(user): sidToRemove[user] = []
                     sidToRemove[user].append(game)
 
         for user in sidToRemove:
