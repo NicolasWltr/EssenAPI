@@ -52,13 +52,30 @@ def init(socketio):
 
         mes = sid + "\n-> " + mes
 
-        gp = ""
-        for game in gamePins:
-            for user in gamePins[game]:
-                if user == sid:
-                    gp = game
+        gp = gpForSid(sid)
+
+        if gp is "":
+            return
+
         for user in gamePins[gp]:
             socketio.emit('chat', mes, room=user)
+
+    @socketio.on('GetGameState')
+    def getGameState():
+        sid = request.sid
+
+        gp = gpForSid(sid)
+
+        for user in gamePins[gp]:
+            if user == sid:
+                return
+
+            socketio.emit('GameStateReq', sid, room=user)
+
+    @socketio.on('RespWithGameState')
+    def RespWithGameState(state, sid):
+        print(sid)
+        print(state)
 
     def mesAllMem(pin):
         for user in gamePins[pin]:
@@ -94,3 +111,12 @@ def init(socketio):
         for user in sidToRemove:
             for game in sidToRemove[user]:
                 gamePins[game].remove(user)
+
+    def gpForSid(sid):
+        gp = ""
+        for game in gamePins:
+            for user in gamePins[game]:
+                if user == sid:
+                    gp = game
+
+        return gp
