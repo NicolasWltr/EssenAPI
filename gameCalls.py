@@ -44,7 +44,7 @@ def init(socketio):
         print('Connecting to game pin', pin)
 
         gamePins[pin].append(sid)
-        socketio.emit('connectToGamePin', pin, room=sid)
+        socketio.emit('connectToGamePin', 1, room=sid)
 
 
 
