@@ -17,6 +17,8 @@ def init(socketio):
     def disconnect():
         sid = request.sid
         clients.remove(sid)
+        removeUnusedGamePin()
+        print(gamePins)
         print('Client disconnected')
 
     @socketio.on('newGamePin')
