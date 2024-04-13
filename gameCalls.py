@@ -3,7 +3,6 @@ import random
 
 
 def init(socketio):
-
     gamePins = {}
     clients = []
 
@@ -86,11 +85,10 @@ def init(socketio):
         for game in gamePins:
             for user in gamePins[game]:
                 if user not in clients:
-                    if not sidToRemove.__contains__(user): sidToRemove[user] = []
+                    if not sidToRemove.__contains__(user):
+                        sidToRemove[user] = []
                     sidToRemove[user].append(game)
 
         for user in sidToRemove:
             for game in sidToRemove[user]:
                 gamePins[game].remove(user)
-
-
