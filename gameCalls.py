@@ -43,12 +43,14 @@ def init(socketio):
 
         print('Connecting to game pin', pin)
 
+        mesAllMem(pin)
+
         gamePins[pin].append(sid)
         socketio.emit('connectToGamePin', 1, room=sid)
 
-
-
-
+    def mesAllMem(pin):
+        for user in gamePins[pin]:
+            socketio.emit('AllConnected', room=user)
 
     def genPin():
         pin = random.randint(100000, 999999)
