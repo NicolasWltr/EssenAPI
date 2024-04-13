@@ -45,6 +45,17 @@ def init(socketio):
         gamePins[pin].append(sid)
         mesAllMem(pin)
 
+    @socketio.on('chatToGame')
+    def chatToGame(mes):
+        sid = request.sid
+        gp = ""
+        for game in gamePins:
+            for user in gamePins[game]:
+                if user == sid:
+                    gp = game
+        for user in gamePins[gp]:
+            socketio.emit('chat', mes, room=user)
+
     def mesAllMem(pin):
         for user in gamePins[pin]:
             socketio.emit('AllConnected', room=user)
