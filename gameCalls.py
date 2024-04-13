@@ -73,9 +73,8 @@ def init(socketio):
     def removeUnusedGamePin():
         pinsToRem = []
         for pin in gamePins:
-            for user in gamePins[pin]:
-                if user not in clients:
-                    pinsToRem.append(pin)
+            if len(gamePins[pin]) == 0:
+                pinsToRem.append(pin)
 
         for pin in pinsToRem:
             del gamePins[pin]
