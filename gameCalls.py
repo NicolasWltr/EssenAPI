@@ -25,7 +25,6 @@ def init(socketio):
         gamePins.append(sid)
         socketio.emit('gamePin', pin, room=sid)
 
-
     @socketio.on('hello')
     def hello(message):
         sid = request.sid
