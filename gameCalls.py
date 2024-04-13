@@ -4,7 +4,7 @@ import random
 
 def init(socketio):
 
-    gamePins = []
+    gamePins = {}
     clients = []
 
     @socketio.on('connect')
@@ -23,27 +23,9 @@ def init(socketio):
     def newGamePin():
         sid = request.sid
         pin = genPin()
-        print(pin)
-        gamePins.append(sid)
+        gamePins[pin] = sid
+        print(gamePins)
         socketio.emit('gamePin', pin, room=sid)
-
-    @socketio.on('hello')
-    def hello(message):
-        sid = request.sid
-        print(message, sid)
-        socketio.emit('hello', message, room=sid)
-
-    @socketio.on('helloAll')
-    def helloAll(message):
-        sid = request.sid
-        print(message, sid)
-        socketio.emit('hello', message)
-
-    @socketio.on('helloOthers')
-    def helloOthers(message):
-        sid = request.sid
-        print(message, sid)
-        socketio.emit('hello', message, include_self=False)
 
     def genPin():
         pin = random.randint(100000, 999999)
