@@ -31,6 +31,8 @@ def init(socketio):
 
     @socketio.on('connectToPin')
     def connectToPin(pin):
+        removeUnusedGamePin()
+        removeUnusedSidFromGame()
         sid = request.sid
         if pin not in gamePins:
             print('Pin not found', pin)
@@ -48,7 +50,7 @@ def init(socketio):
     def chatToGame(mes):
         sid = request.sid
 
-        mes = sid + "-> " + mes
+        mes = sid + "\n-> " + mes
 
         gp = ""
         for game in gamePins:
