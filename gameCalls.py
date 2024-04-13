@@ -30,6 +30,22 @@ def init(socketio):
         print(gamePins)
         socketio.emit('gamePin', pin, room=sid)
 
+    @socketio.on('connectToPin')
+    def connectToPin(pin):
+        sid = request.sid
+        if pin not in gamePins:
+            socketio.emit('connectToGamePin', "No game pins found", room=sid)
+        if len(gamePins[pin]) >= 2:
+            socketio.emit('connectToGamePin', "No game pins found", room=sid)
+            return
+
+        gamePins[pin].append(sid)
+        socketio.emit('connectToGamePin', pin, room=sid)
+
+
+
+
+
     def genPin():
         pin = random.randint(100000, 999999)
         while pin in gamePins:
