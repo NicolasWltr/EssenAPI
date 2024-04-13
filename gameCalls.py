@@ -36,10 +36,10 @@ def init(socketio):
         sid = request.sid
         if pin not in gamePins:
             print('Pin not found', pin)
-            socketio.emit('connectToGamePin', "No game pins found", room=sid)
+            socketio.emit('ConnectedToGame', "Game Pin not found", room=sid)
         if len(gamePins[pin]) >= 2:
             print('Game full', pin)
-            socketio.emit('connectToGamePin', "No game pins found", room=sid)
+            socketio.emit('ConnectedToGame', "Game full", room=sid)
             return
 
         print('Connecting to game pin', pin)
@@ -62,7 +62,7 @@ def init(socketio):
 
     def mesAllMem(pin):
         for user in gamePins[pin]:
-            socketio.emit('AllConnected', room=user)
+            socketio.emit('ConnectedToGame', "Success", room=user)
 
     def genPin():
         pin = random.randint(100000, 999999)
