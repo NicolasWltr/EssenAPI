@@ -54,7 +54,7 @@ def init(socketio):
 
         gp = gpForSid(sid)
 
-        if gp is "":
+        if gp == "":
             return
 
         for user in gamePins[gp]:
