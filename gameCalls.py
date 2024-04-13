@@ -23,7 +23,8 @@ def init(socketio):
     def newGamePin():
         sid = request.sid
         pin = genPin()
-        gamePins[pin] = sid
+        gamePins[pin] = []
+        gamePins[pin].append(sid)
         print(gamePins)
         socketio.emit('gamePin', pin, room=sid)
 
@@ -33,3 +34,9 @@ def init(socketio):
             pin = random.randint(100000, 99999999)
 
         return pin
+
+    def removeUnusedGamePin():
+        for pin in gamePins:
+            for user in gamePins[pin]:
+                if user not in clients:
+                    gamePins.pop(pin)
