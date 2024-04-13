@@ -1,4 +1,5 @@
 from flask import request
+import random
 
 
 def init(socketio):
@@ -21,7 +22,7 @@ def init(socketio):
     @socketio.on('newGamePin')
     def newGamePin():
         sid = request.sid
-        pin = '123456'
+        pin = genPin()
         gamePins.append(sid)
         socketio.emit('gamePin', pin, room=sid)
 
@@ -42,3 +43,10 @@ def init(socketio):
         sid = request.sid
         print(message, sid)
         socketio.emit('hello', message, include_self=False)
+
+    def genPin():
+        pin = random.randint(100000, 999999)
+        while pin in gamePins:
+            pin = random.randint(100000, 99999999)
+
+        return pin
