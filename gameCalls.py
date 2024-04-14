@@ -80,10 +80,13 @@ def init(socketio):
 
     @socketio.on('UpdateCons')
     def UpdateCons(state, gPin):
+        sid = request.sid
         if gPin not in gamePins:
             print('Pin not found', gPin)
 
         for user in gamePins[gPin]:
+            if user == sid:
+                return
             print("update ", user)
             socketio.emit('getUpdatedFromPIN', state, room=user)
 
