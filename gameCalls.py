@@ -86,7 +86,7 @@ def init(socketio):
 
         for user in gamePins[gPin]:
             if user == sid:
-                return
+                pass
             print("update ", user)
             socketio.emit('getUpdatedFromPIN', state, room=user)
 
