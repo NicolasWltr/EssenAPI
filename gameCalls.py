@@ -84,6 +84,7 @@ def init(socketio):
             return
 
         for user in gamePins[gPin]:
+            print("update ", user)
             socketio.emit('getUpdatedFromPIN', state, room=user)
 
     def mesAllMem(pin):
