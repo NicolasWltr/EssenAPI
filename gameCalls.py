@@ -76,6 +76,7 @@ def init(socketio):
     def RespWithGameState(state, sid):
         print(sid)
         print(state)
+        socketio.emit('GameStateResp', state, room=sid)
 
     def mesAllMem(pin):
         for user in gamePins[pin]:
