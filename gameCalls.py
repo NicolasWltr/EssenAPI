@@ -78,6 +78,14 @@ def init(socketio):
         print(state)
         socketio.emit('GameStateResp', state, room=sid)
 
+    @socketio.on('UpdateCons')
+    def UpdateCons(state, gPin):
+        if not gPin in gamePins:
+            return
+
+        for user in gamePins[gPin]:
+            socketio.emit('getUpdatedFromPIN', state, room=user)
+
     def mesAllMem(pin):
         for user in gamePins[pin]:
             socketio.emit('ConnectedToGame', "Success", room=user)
