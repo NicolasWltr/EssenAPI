@@ -80,7 +80,7 @@ def init(socketio):
 
     @socketio.on('UpdateCons')
     def UpdateCons(state, gPin):
-        if not gPin in gamePins:
+        if gPin not in gamePins:
             return
 
         for user in gamePins[gPin]:
