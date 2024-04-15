@@ -1,7 +1,3 @@
-import asyncio
-import threading
-import time
-
 from flask import request
 import random
 
@@ -12,8 +8,6 @@ def init(socketio):
     clients = []
 
     nextClient = [1000]
-
-    RTClient = []
 
     @socketio.on('connect')
     def connect():
@@ -198,27 +192,3 @@ def init(socketio):
             return clientSid[client]
 
         return "Undefined"
-
-    @socketio.on('RTCon')
-    def RTCon(client):
-        print(client)
-        if len(RTClient) == 0:
-            RTClient.append(client)
-        else:
-            RTClient[0] = client
-        RTTestSend()
-
-    async def RTTestSend():
-        print("RTClient")
-        while True:
-            print("RTClient")
-            await asyncio.sleep(2)
-            print("RTTestSend")
-            print(RTClient)
-            if len(RTClient) == 0:
-                print("RTTestSend -> no Client")
-            else:
-                print(getSid(RTClient[0]))
-                socketio.emit('RTTest', "Hi", room=getSid(RTClient[0]))
-                socketio.emit('RTTest', "Hi", room=getSid(1000))
-                print("Sending RTTestSend")
