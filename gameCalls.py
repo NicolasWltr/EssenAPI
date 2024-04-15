@@ -205,9 +205,11 @@ def init(socketio):
         if len(RTClient) == 0:
             print("RTTestSend -> no Client")
             time.sleep(2)
-            return
-        socketio.emit('RTTest', room=getSid(RTClient[0]))
-        time.sleep(2)
+        else:
+            #socketio.emit('RTTest', room=getSid(RTClient[0]))
+            print("Sending RTTestSend")
+            time.sleep(2)
+        RTTestSend()
 
     t = Thread(target=RTTestSend)
     t.run()
