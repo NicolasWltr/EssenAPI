@@ -212,13 +212,12 @@ def init(socketio):
         while True:
             print("RTClient")
             threading.Event().wait(2)
-            # print("RTTestSend")
-            # print(RTClient)
-            # if len(RTClient) == 0:
-            #     print("RTTestSend -> no Client")
-            # else:
-            #     print(getSid(RTClient[0]))
-            #     socketio.emit('RTTest', "Hi", room=getSid(1000))
-            #     socketio.emit('RTTest', "Hi", room=getSid(1000))
-            #     print("Sending RTTestSend")
-            # time.sleep(2)
+            print("RTTestSend")
+            print(RTClient)
+            if len(RTClient) == 0:
+                print("RTTestSend -> no Client")
+            else:
+                print(getSid(RTClient[0]))
+                socketio.emit('RTTest', "Hi", room=getSid(1000))
+                socketio.emit('RTTest', "Hi", room=getSid(1000))
+                print("Sending RTTestSend")
