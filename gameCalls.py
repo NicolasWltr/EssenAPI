@@ -5,11 +5,21 @@ import random
 def init(socketio):
     gamePins = {}
     clientSid = {}
+    clients = []
 
     nextClient = [1000]
 
     @socketio.on('connect')
     def connect():
+        if len(clients) == 0:
+            for i in range(0, 10):
+                clients.append(str(i))
+        clients.append(request.sid)
+        print('Client connected')
+
+    @socketio.on('disconnect')
+    def disconnect():
+        clients.pop(0)
         print('Client connected')
 
     @socketio.on('getClient')
@@ -140,6 +150,11 @@ def init(socketio):
         for user in clientToRemove:
             for game in clientToRemove[user]:
                 gamePins[game].remove(user)
+
+        clientToRemove.clear()
+
+        for client in clientSid.values():
+            print(client, "removemomveo")
 
     def gpForSid(client):
         gp = ""
