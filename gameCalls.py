@@ -79,6 +79,8 @@ def init(socketio):
     def getGameState(client):
         updateClient(client, request.sid)
 
+        print(client, "wants to get game state")
+
         gp = gpForSid(client)
 
         for user in gamePins[gp]:
@@ -89,11 +91,10 @@ def init(socketio):
             return
 
     @socketio.on('RespWithGameState')
-    def RespWithGameState(state, client):
+    def RespWithGameState(state, clientToGet, client):
         updateClient(client, request.sid)
-        print(client)
-        print(state)
-        socketio.emit('GameStateResp', state, room=getSid(client))
+        print(client, "sends game state to", clientToGet)
+        socketio.emit('GameStateResp', state, room=getSid(clientToGet))
 
     @socketio.on('UpdateCons')
     def UpdateCons(state, gPin, client):
