@@ -62,7 +62,7 @@ def init(socketio):
         updateClient(client, request.sid)
         print("Chatting")
 
-        mes = client, "\n-> " + mes
+        mes = "\n-> " + mes
 
         print(mes)
 
