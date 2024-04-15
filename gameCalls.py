@@ -203,21 +203,20 @@ def init(socketio):
         print(client)
         if len(RTClient) == 0:
             RTClient.append(client)
-            #RTTestSend()
-        if len(RTClient) > 0:
-            for i in range(0, 5):
-                socketio.emit('RTTest', "Hi", room=getSid(client))
+        else:
+            RTClient[0] = client
 
     def RTTestSend():
         while True:
-            socketio.emit('RTTest', "Hi", room=getSid(1000))
-        #print("RTTestSend")
-        #print(RTClient)
-        #if len(RTClient) == 0:
-        #    print("RTTestSend -> no Client")
-        #else:
-        #    print(getSid(RTClient[0]))
-        #    socketio.emit('RTTest', "Hi", room=getSid(1000))
-        #    socketio.emit('RTTest', "Hi", room=getSid(1000))
-        #    print("Sending RTTestSend")
-        #threading.Timer(2, RTTestSend).start()
+            print("RTTestSend")
+            print(RTClient)
+            if len(RTClient) == 0:
+                print("RTTestSend -> no Client")
+            else:
+                print(getSid(RTClient[0]))
+                socketio.emit('RTTest', "Hi", room=getSid(1000))
+                socketio.emit('RTTest', "Hi", room=getSid(1000))
+                print("Sending RTTestSend")
+            time.sleep(2)
+
+    socketio.start_background_task(target=RTTestSend)
