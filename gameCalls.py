@@ -50,6 +50,7 @@ def init(socketio):
 
     @socketio.on('updateClient')
     def updateClientIO(client):
+        print(client, request.sid)
         updateClient(client, request.sid)
 
     @socketio.on('disconnectClient')
@@ -185,6 +186,7 @@ def init(socketio):
         return gp
 
     def updateClient(client, sid):
+        print(client, sid)
         if client in clientSid:
             clientSid.update({client: sid})
         else:
