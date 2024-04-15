@@ -198,6 +198,7 @@ def init(socketio):
 
     @socketio.on('RTCon')
     def RTCon(client):
+        print(client)
         RTClient[0] = client
 
     def RTTestSend():
