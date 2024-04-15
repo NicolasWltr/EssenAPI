@@ -201,8 +201,6 @@ def init(socketio):
         print(client)
         if len(RTClient) == 0:
             RTClient.append(client)
-        else:
-            RTClient[0] = client
 
     def RTTestSend():
         print("RTTestSend")
