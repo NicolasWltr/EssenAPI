@@ -184,7 +184,6 @@ def init(socketio):
 
         return gp
 
-
     def updateClient(client, sid):
         if client in clientSid:
             clientSid.update({client: sid})
