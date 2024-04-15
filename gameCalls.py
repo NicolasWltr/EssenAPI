@@ -205,7 +205,8 @@ def init(socketio):
             RTClient.append(client)
             #RTTestSend()
         if len(RTClient) > 0:
-            socketio.emit('RTTest', "Hi", room=getSid(client))
+            for i in range(0, 5):
+                socketio.emit('RTTest', "Hi", room=getSid(client))
 
     def RTTestSend():
         while True:
