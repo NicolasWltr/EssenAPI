@@ -22,6 +22,14 @@ def init(socketio):
         clients.pop(0)
         print('Client connected')
 
+    @socketio.on('leaveGame')
+    def leaveGame(gamePin, client):
+        updateClient(client, request.sid)
+
+        if gamePin in gamePins:
+            del gamePins[gamePin][client]
+        print(client, "left", gamePin)
+
     @socketio.on('getClient')
     def getClient():
         sid = request.sid
