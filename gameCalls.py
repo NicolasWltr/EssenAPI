@@ -1,3 +1,6 @@
+import time
+from threading import Thread
+
 from flask import request
 import random
 
@@ -8,6 +11,8 @@ def init(socketio):
     clients = []
 
     nextClient = [1000]
+
+    RTClient = []
 
     @socketio.on('connect')
     def connect():
@@ -44,7 +49,7 @@ def init(socketio):
         nextClient[0] += 1
 
     @socketio.on('updateClient')
-    def updateClient(client):
+    def updateClientIO(client):
         updateClient(client, request.sid)
 
     @socketio.on('disconnectClient')
@@ -179,6 +184,7 @@ def init(socketio):
 
         return gp
 
+
     def updateClient(client, sid):
         if client in clientSid:
             clientSid.update({client: sid})
@@ -190,3 +196,14 @@ def init(socketio):
             return clientSid[client]
 
         return "Undefined"
+
+    @socketio.on('RTCon')
+    def RTCon(client):
+        RTClient[0] = client
+
+    def RTTestSend():
+        socketio.emit('RTTest', room=getSid(RTClient[0]))
+        time.sleep(2)
+
+    t = Thread(target=RTTestSend)
+    t.run()
