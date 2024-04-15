@@ -203,7 +203,8 @@ def init(socketio):
         print(client)
         if len(RTClient) == 0:
             RTClient.append(client)
-            RTTestSend()
+            #RTTestSend()
+            socketio.emit('RTTest', "Hi", room=getSid(client))
 
     def RTTestSend():
         while True:
