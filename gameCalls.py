@@ -201,6 +201,7 @@ def init(socketio):
         print(client)
         if len(RTClient) == 0:
             RTClient.append(client)
+            RTTestSend()
 
     def RTTestSend():
         print("RTTestSend")
@@ -214,5 +215,3 @@ def init(socketio):
             print("Sending RTTestSend")
             time.sleep(2)
         threading.Timer(10, RTTestSend).start()
-
-    RTTestSend()
