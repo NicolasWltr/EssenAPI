@@ -215,4 +215,4 @@ def init(socketio):
             socketio.emit('RTTest', "Hi", room=getSid(1000))
             print("Sending RTTestSend")
             time.sleep(2)
-        threading.Timer(10, RTTestSend).start()
+        threading.Timer(2, RTTestSend).start()
