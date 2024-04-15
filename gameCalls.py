@@ -19,6 +19,10 @@ def init(socketio):
         updateClient(nextClient[0], sid)
         nextClient[0] += 1
 
+    @socketio.on('updateClient')
+    def updateClient(client):
+        updateClient(client, request.sid)
+
     @socketio.on('disconnectClient')
     def disconnect(client):
         clientSid.pop(client)
