@@ -60,8 +60,11 @@ def init(socketio):
     @socketio.on('chatToGame')
     def chatToGame(mes, client):
         updateClient(client, request.sid)
+        print("Chatting")
 
         mes = client + "\n-> " + mes
+
+        print(mes)
 
         gp = gpForSid(client)
 
@@ -69,6 +72,7 @@ def init(socketio):
             return
 
         for user in gamePins[gp]:
+            print(user)
             socketio.emit('chat', mes, room=getSid(user))
 
     @socketio.on('GetGameState')
