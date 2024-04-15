@@ -199,7 +199,10 @@ def init(socketio):
     @socketio.on('RTCon')
     def RTCon(client):
         print(client)
-        RTClient[0] = client
+        if len(RTClient) == 0:
+            RTClient.append(client)
+        else:
+            RTClient[0] = client
 
     def RTTestSend():
         print("RTTestSend")
