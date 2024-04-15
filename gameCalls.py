@@ -28,13 +28,13 @@ def init(socketio):
 
         if gamePin in gamePins:
             game = gamePins[gamePin]
-            print(game, "<- Game")
             if isinstance(game, list):
                 print('Game Leave')
                 game.remove(client)
                 print(game)
 
-        print('Game Leave', gamePins)
+        removeUnusedSidFromGame()
+        removeUnusedGamePin()
 
     @socketio.on('getClient')
     def getClient():
