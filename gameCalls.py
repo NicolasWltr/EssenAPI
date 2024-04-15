@@ -27,9 +27,9 @@ def init(socketio):
         updateClient(client, request.sid)
 
         if gamePin in gamePins:
-            del gamePins[gamePin][client]
-        print(client, "left", gamePin)
-        print(gamePins)
+            game = gamePins[gamePin]
+            if isinstance(game, list):
+                game.remove(client)
 
     @socketio.on('getClient')
     def getClient():
