@@ -29,6 +29,7 @@ def init(socketio):
         if gamePin in gamePins:
             del gamePins[gamePin][client]
         print(client, "left", gamePin)
+        print(gamePins)
 
     @socketio.on('getClient')
     def getClient():
