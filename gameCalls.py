@@ -28,7 +28,7 @@ def init(socketio):
 
         if gamePin in gamePins:
             game = gamePins[gamePin]
-            print(game)
+            print(game, "<- Game")
             if isinstance(game, list):
                 print('Game Leave')
                 game.remove(client)
