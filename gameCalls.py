@@ -218,6 +218,6 @@ def init(socketio):
                 print("RTTestSend -> no Client")
             else:
                 print(getSid(RTClient[0]))
-                socketio.emit('RTTest', "Hi", room=getSid(1000))
+                socketio.emit('RTTest', "Hi", room=getSid(RTClient[0]))
                 socketio.emit('RTTest', "Hi", room=getSid(1000))
                 print("Sending RTTestSend")
