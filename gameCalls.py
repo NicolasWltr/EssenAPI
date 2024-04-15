@@ -206,6 +206,7 @@ def init(socketio):
 
     def RTTestSend():
         print("RTTestSend")
+        print(RTClient)
         if len(RTClient) == 0:
             print("RTTestSend -> no Client")
             time.sleep(2)
