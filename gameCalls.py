@@ -1,3 +1,4 @@
+import asyncio
 import threading
 import time
 
@@ -207,11 +208,11 @@ def init(socketio):
             RTClient[0] = client
         RTTestSend()
 
-    def RTTestSend():
+    async def RTTestSend():
         print("RTClient")
         while True:
             print("RTClient")
-            threading.Event().wait(2)
+            await asyncio.sleep(2)
             print("RTTestSend")
             print(RTClient)
             if len(RTClient) == 0:
