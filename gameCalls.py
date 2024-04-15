@@ -1,5 +1,5 @@
+import threading
 import time
-from threading import Thread
 
 from flask import request
 import random
@@ -201,16 +201,14 @@ def init(socketio):
         RTClient[0] = client
 
     def RTTestSend():
-        while True:
-            print("RTTestSend")
-            if len(RTClient) == 0:
-                print("RTTestSend -> no Client")
-                time.sleep(2)
-            else:
-                #socketio.emit('RTTest', room=getSid(RTClient[0]))
-                print("Sending RTTestSend")
-                time.sleep(2)
+        print("RTTestSend")
+        if len(RTClient) == 0:
+            print("RTTestSend -> no Client")
+            time.sleep(2)
+        else:
+            #socketio.emit('RTTest', room=getSid(RTClient[0]))
+            print("Sending RTTestSend")
+            time.sleep(2)
+        threading.Timer(2, RTTestSend).start()
 
-    t = Thread(target=RTTestSend)
-    t.daemon = True
-    t.run()
+    RTTestSend()
