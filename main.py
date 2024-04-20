@@ -280,7 +280,10 @@ def essen():
 
     headers = {'Token': '1074473'}
 
-    cb.send(session['currentUser'] + ' hat zum Essen gerufen')
+    if session.__contains__('currentUser'):
+        cb.send(session['currentUser'] + ' hat zum Essen gerufen')
+    else:
+        cb.send('App' + ' hat zum Essen gerufen')
 
     response = rq.get(url, headers=headers)
 
@@ -298,7 +301,10 @@ def resetTimer():
 
     headers = {'Token': '1074473'}
 
-    cb.send(session['currentUser'] + ' hat den Timer resettet')
+    if session.__contains__('currentUser'):
+        cb.send(session['currentUser'] + ' hat den Timer resettet')
+    else:
+        cb.send('App' + ' hat den Timer resettet')
 
     response = rq.get(url, headers=headers)
 
@@ -316,7 +322,10 @@ def pp():
 
     headers = {'Token': '1074473'}
 
-    cb.send(session['currentUser'] + ' hat Play/Pause gedrückt')
+    if session.__contains__('currentUser'):
+        cb.send(session['currentUser'] + ' hat Play/Pause gedrückt')
+    else:
+        cb.send('App' + ' hat Play/Pause gedrückt')
 
     response = rq.get(url, headers=headers)
 
@@ -334,7 +343,10 @@ def stop():
 
     headers = {'Token': '1074473'}
 
-    cb.send(session['currentUser'] + ' hat den Endpunkt am PC gestoppt')
+    if session.__contains__('currentUser'):
+        cb.send(session['currentUser'] + ' hat den Endpunkt am PC gestoppt')
+    else:
+        cb.send('App' + ' hat den Endpunkt am PC gestoppt')
 
     response = rq.get(url, headers=headers)
 
@@ -352,7 +364,10 @@ def shutdown():
 
     headers = {'Token': '1074473'}
 
-    cb.send(session['currentUser'] + ' hat den Computer heruntergefahren')
+    if session.__contains__('currentUser'):
+        cb.send(session['currentUser'] + ' hat den Computer heruntergefahren')
+    else:
+        cb.send('App' + ' hat den Computer heruntergefahren')
 
     response = rq.get(url, headers=headers)
 
@@ -370,7 +385,10 @@ def shutdownstop():
 
     headers = {'Token': '1074473'}
 
-    cb.send(session['currentUser'] + ' hat das herunterfahren abgebrochen')
+    if session.__contains__('currentUser'):
+        cb.send(session['currentUser'] + ' hat das herunterfahren abgebrochen')
+    else:
+        cb.send('App' + ' hat das herunterfahren abgebrochen')
 
     response = rq.get(url, headers=headers)
 
