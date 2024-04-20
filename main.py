@@ -209,7 +209,6 @@ def getAllAvailableAPICalls():
         }
     ])
 
-
 @app.route('/getter/getAllSaves', methods=['GET'])
 def getAllSaves():
     if request.headers.get('Token') != 'nivanprpquß24723h780cnß2n1n':
@@ -274,6 +273,19 @@ def checkForHeader():
 
 
 # Call functions on PC
+@app.route('/apiWP/lighttoggle', methods=['GET'])
+def lighttoggle():
+    if checkForHeader() == "denied":
+        return "denied"
+
+    url = "http://192.168.178.41/toggle"
+
+    response = rq.get(url)
+
+    cb.send('Antwort => ' + response.text)
+
+    return response.text
+
 @app.route('/apiWP/essen', methods=['GET'])
 def essen():
     if checkForHeader() == "denied":
