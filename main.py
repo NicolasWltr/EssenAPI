@@ -286,6 +286,7 @@ def lighttoggle():
 
     return response.text
 
+
 @app.route('/apiWP/essen', methods=['GET'])
 def essen():
     if checkForHeader() == "denied":
