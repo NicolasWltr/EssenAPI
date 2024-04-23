@@ -202,10 +202,7 @@ def getAllAvailableAPICalls():
             "name": "Stop Shutdown", "url": "http://walternicolas.de/apiWP/shutdownstop", "type": "call"
         },
         {
-            "name": "Lampe An", "url": "http://192.168.178.41/on", "type": "call"
-        },
-        {
-            "name": "Lampe Aus", "url": "http://192.168.178.41/off", "type": "call"
+            "name": "Lampe Toggle", "url": "http://walternicolas.de/apiWP/lighttoggle", "type": "call"
         }
     ])
 
