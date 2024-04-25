@@ -284,6 +284,34 @@ def lighttoggle():
     return response.text
 
 
+@app.route('/apiWP/lighton', methods=['GET'])
+def lighton():
+    if checkForHeader() == "denied":
+        return "denied"
+
+    url = "http://192.168.178.41/on"
+
+    response = rq.get(url)
+
+    cb.send('Antwort => ' + response.text)
+
+    return response.text
+
+
+@app.route('/apiWP/lightoff', methods=['GET'])
+def lightoff():
+    if checkForHeader() == "denied":
+        return "denied"
+
+    url = "http://192.168.178.41/off"
+
+    response = rq.get(url)
+
+    cb.send('Antwort => ' + response.text)
+
+    return response.text
+
+
 @app.route('/apiWP/essen', methods=['GET'])
 def essen():
     if checkForHeader() == "denied":
