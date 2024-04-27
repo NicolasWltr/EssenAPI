@@ -7,6 +7,7 @@ import json
 import requests as rq
 import chatbot as cb
 import gameCalls
+import realTimeCom
 
 app = Flask(__name__)
 app.secret_key = 'asdfghjklöä'
@@ -15,6 +16,7 @@ app.static_folder = 'static'
 socketio = SocketIO(app, cors_allowed_origins='ws://walternicolas.de:80')
 
 gameCalls.init(socketio)
+realTimeCom.init(socketio)
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 login_file_path = os.path.join(current_dir, 'data', 'login.json')
