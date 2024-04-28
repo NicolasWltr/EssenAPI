@@ -127,6 +127,8 @@ def init(socketio):
         if gPin not in gamePins:
             print('Pin not found', gPin)
 
+        print(client)
+
         for user in gamePins[gPin]:
             if user == client:
                 pass
