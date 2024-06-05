@@ -39,7 +39,7 @@ img {
 
 .hider {
     z-index: 2;
-    mask-image: linear-gradient(to bottom, transparent 60%, black 50%);
+    mask-image: linear-gradient(to bottom, transparent 75%, black 50%);
 }
 
 .kiss {
@@ -52,10 +52,4 @@ img {
     height: 300px;
     padding-bottom: 1200px !important;
     opacity: 1;
-}
-
-.opened {
-    height: 750px !important;
-    filter: brightness(2.0) saturate(0.3);
-    padding-bottom: 190px;
 }
