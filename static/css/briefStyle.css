@@ -1,0 +1,60 @@
+html {
+    background-color: black;
+}
+
+button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+img {
+    border: none;
+    outline: none;
+}
+
+.center {
+    display: grid;
+    place-items: center;
+    height: 100vh;
+}
+
+.envelope {
+    height: 400px;
+    padding-top: 15%;
+}
+
+.oneone {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.top {
+    z-index: 1;
+}
+
+.bottom {
+    z-index: 0;
+}
+
+.hider {
+    z-index: 2;
+    mask-image: linear-gradient(to bottom, transparent 60%, black 50%);
+}
+
+.kiss {
+    padding-top: 400px;
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+
+.popup {
+    padding-top: 50px !important;
+    opacity: 1;
+}
+
+.opened {
+    height: 500px !important;
+    filter: brightness(2.0) saturate(0.3);
+    padding-bottom: 190px;
+}
