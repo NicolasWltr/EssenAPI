@@ -20,7 +20,7 @@ img {
 }
 
 .envelope {
-    height: 400px;
+    height: 600px;
     padding-top: 15%;
 }
 
@@ -49,12 +49,13 @@ img {
 }
 
 .popup {
-    padding-top: 50px !important;
+    height: 300px;
+    padding-bottom: 1200px !important;
     opacity: 1;
 }
 
 .opened {
-    height: 500px !important;
+    height: 750px !important;
     filter: brightness(2.0) saturate(0.3);
     padding-bottom: 190px;
 }
